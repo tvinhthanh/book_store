@@ -12,6 +12,8 @@ import { useAppContext } from "./contexts/AppContext";
 
 import Home from "./pages/Home";
 import MyCart from "./pages/cart/MyCart";
+import BookDetail from "./pages/BookDetail";
+import CategoryBooks from "./components/CategoriesBook";
 
 // ADMIN PAGES
 // import BooksPage from "./pages/books/BooksPage";
@@ -31,26 +33,105 @@ const App = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Layout><Home /></Layout>} />
-        <Route path="/register" element={<Layout><Register /></Layout>} />
-        <Route path="/login" element={<Layout><SignIn /></Layout>} />
+        <Route
+          path="/"
+          element={
+            <Layout>
+              <Home />
+            </Layout>
+          }
+        />
+        <Route
+          path="/register"
+          element={
+            <Layout>
+              <Register />
+            </Layout>
+          }
+        />
+        <Route
+          path="/login"
+          element={
+            <Layout>
+              <SignIn />
+            </Layout>
+          }
+        />
+        <Route
+          path="/books/:id"
+          element={
+            <Layout>
+              <BookDetail />
+            </Layout>
+          }
+        />
         {/* <Route path="/product/:productId" element={<Layout><ProductDetail /></Layout>} /> */}
 
         {isLoggedIn && (
           <>
             {role === "user" && (
               <>
-                <Route path="/cart" element={<Layout><MyCart /></Layout>} />
-                <Route path="/my-orders" element={<Layout><UserOrdersPage /></Layout>} />
+                <Route
+                  path="/cart"
+                  element={
+                    <Layout>
+                      <MyCart />
+                    </Layout>
+                  }
+                />
+                <Route
+                  path="/my-orders"
+                  element={
+                    <Layout>
+                      <UserOrdersPage />
+                    </Layout>
+                  }
+                />
+                <Route
+                  path="/the-loai/:id"
+                  element={
+                    <Layout>
+                      <CategoryBooks />
+                    </Layout>
+                  }
+                />
               </>
             )}
 
             {role === "admin" && (
               <>
-                <Route path="/books" element={<Layout><BooksPage /></Layout>} />
-                <Route path="/publishers" element={<Layout><PublishersPage /></Layout>} />
-                <Route path="/authors" element={<Layout><AuthorsPage /></Layout>} />
-                <Route path="/categories" element={<Layout><Danhmuc /></Layout>} />
+                <Route
+                  path="/books"
+                  element={
+                    <Layout>
+                      <BooksPage />
+                    </Layout>
+                  }
+                />
+                <Route
+                  path="/publishers"
+                  element={
+                    <Layout>
+                      <PublishersPage />
+                    </Layout>
+                  }
+                />
+                <Route
+                  path="/authors"
+                  element={
+                    <Layout>
+                      <AuthorsPage />
+                    </Layout>
+                  }
+                />
+                <Route
+                  path="/categories"
+                  element={
+                    <Layout>
+                      <Danhmuc />
+                    </Layout>
+                  }
+                />
 
                 {/* <Route path="/orders" element={<Layout><OrdersAdminPage /></Layout>} /> */}
               </>

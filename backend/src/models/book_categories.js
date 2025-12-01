@@ -9,6 +9,19 @@ const BookCategories = {
     return rows;
   },
 
+  getBooksByCategory: async (categoryId) => {
+    const [rows] = await db.execute(
+      `
+        SELECT b.*
+        FROM books b
+        INNER JOIN book_categories bc ON bc.book_id = b.book_id
+        WHERE bc.category_id = ?
+      `,
+      [categoryId]
+    );
+    return rows;
+  },
+
   link: async (bookId, categoryId) => {
     const sql = `
       INSERT IGNORE INTO book_categories (book_id, category_id)
