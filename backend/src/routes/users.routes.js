@@ -32,6 +32,7 @@ router.get("/me", verifyToken, async (req, res, next) => {
       email: user.email,
       role: user.role,
       phone: user.phone,
+      address: user.address,
     });
   } catch (err) {
     next(err);
@@ -73,6 +74,7 @@ router.post("/", async (req, res, next) => {
       email,
       password: hashed,
       phone,
+      address,
       role: role || "user",
     });
 

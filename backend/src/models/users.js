@@ -4,7 +4,7 @@ const Users = {
   // Lấy tất cả
   getAll: async () => {
     const [rows] = await db.execute(
-      "SELECT id_user, name, email, phone, role, created_at FROM users"
+      "SELECT id_user, name, email, phone, address, role, created_at FROM users"
     );
     return rows;
   },
@@ -12,7 +12,7 @@ const Users = {
   // Lấy theo ID
   getById: async (id) => {
     const [rows] = await db.execute(
-      "SELECT id_user, name, email, phone, role, created_at FROM users WHERE id_user = ?",
+      "SELECT id_user, name, email, phone, address, role, created_at FROM users WHERE id_user = ?",
       [id]
     );
     return rows[0] || null;
@@ -38,6 +38,7 @@ const Users = {
       data.email,
       data.password,
       data.phone || null,
+      data.address || null,
       data.role || "user",
     ]);
     return result;
@@ -50,6 +51,7 @@ const Users = {
       SET name = COALESCE(?, name),
           email = COALESCE(?, email),
           phone = COALESCE(?, phone),
+           address = COALESCE(?, address),
           role = COALESCE(?, role)
       WHERE id_user = ?
     `;
@@ -57,6 +59,7 @@ const Users = {
       data.name ?? null,
       data.email ?? null,
       data.phone ?? null,
+      data.address ?? null,
       data.role ?? null,
       id,
     ]);

@@ -27,18 +27,37 @@ import AuthorsPage from "./pages/tacgia/Tacgia";
 import Danhmuc from "./pages/danhmuc/Danhmuc";
 import BooksPage from "./pages/sach/Sach";
 
+// import RequireAdmin from "./components/RequireAdmin";
+import AdminLayout from "./layouts/adminlayout";
+import HomeAdmin from "./pages/admin/homeadmin";
+import RequireAdmin from "./pages/requireAdmin";
+import AdminBooksPage from "./pages/product/adminBookPage";
+import AdminBookForm from "./pages/product/adminBookForm";
+import AdminCategoriesPage from "./pages/adminCategories/adminCategoriesPage";
+import AdminCategoryForm from "./pages/adminCategories/adminCategoriesForm";
+import AdminOrdersPage from "./pages/adminOrders/adminOrderPage";
+import AdminOrderForm from "./pages/adminOrders/adminOrderForm";
+import AdminUsersPage from "./pages/adminUser/adminUserPage";
+import AdminUserForm from "./pages/adminUser/adminUserForm";
+import Checkout from "./pages/cart/checkOut";
+
 const App = () => {
   const { isLoggedIn, role } = useAppContext();
 
   return (
     <Router>
       <Routes>
+        {/* PUBLIC ROUTES */}
         <Route
           path="/"
           element={
-            <Layout>
-              <Home />
-            </Layout>
+            isLoggedIn && role === "admin" ? (
+              <Navigate to="/admin" replace />
+            ) : (
+              <Layout>
+                <Home />
+              </Layout>
+            )
           }
         />
         <Route
@@ -65,80 +84,65 @@ const App = () => {
             </Layout>
           }
         />
-        {/* <Route path="/product/:productId" element={<Layout><ProductDetail /></Layout>} /> */}
 
-        {isLoggedIn && (
+        {isLoggedIn && role === "user" && (
           <>
-            {role === "user" && (
-              <>
-                <Route
-                  path="/cart"
-                  element={
-                    <Layout>
-                      <MyCart />
-                    </Layout>
-                  }
-                />
-                <Route
-                  path="/my-orders"
-                  element={
-                    <Layout>
-                      <UserOrdersPage />
-                    </Layout>
-                  }
-                />
-                <Route
-                  path="/the-loai/:id"
-                  element={
-                    <Layout>
-                      <CategoryBooks />
-                    </Layout>
-                  }
-                />
-              </>
-            )}
-
-            {role === "admin" && (
-              <>
-                <Route
-                  path="/books"
-                  element={
-                    <Layout>
-                      <BooksPage />
-                    </Layout>
-                  }
-                />
-                <Route
-                  path="/publishers"
-                  element={
-                    <Layout>
-                      <PublishersPage />
-                    </Layout>
-                  }
-                />
-                <Route
-                  path="/authors"
-                  element={
-                    <Layout>
-                      <AuthorsPage />
-                    </Layout>
-                  }
-                />
-                <Route
-                  path="/categories"
-                  element={
-                    <Layout>
-                      <Danhmuc />
-                    </Layout>
-                  }
-                />
-
-                {/* <Route path="/orders" element={<Layout><OrdersAdminPage /></Layout>} /> */}
-              </>
-            )}
+            <Route
+              path="/cart"
+              element={
+                <Layout>
+                  <MyCart />
+                </Layout>
+              }
+            />
+            <Route
+              path="/checkout"
+              element={
+                <Layout>
+                  <Checkout />
+                </Layout>
+              }
+            />
+            <Route
+              path="/my-orders"
+              element={
+                <Layout>
+                  <UserOrdersPage />
+                </Layout>
+              }
+            />
+            <Route
+              path="/the-loai/:id"
+              element={
+                <Layout>
+                  <CategoryBooks />
+                </Layout>
+              }
+            />
           </>
         )}
 
+        <Route path="/admin" element={<RequireAdmin />}>
+          <Route element={<AdminLayout />}>
+            <Route index element={<HomeAdmin />} />
+
+            <Route path="books" element={<AdminBooksPage />} />
+            <Route path="books/create" element={<AdminBookForm />} />
+
+            <Route path="categories" element={<AdminCategoriesPage />} />
+            <Route path="categories/create" element={<AdminCategoryForm />} />
+            <Route path="categories/:id" element={<AdminCategoryForm />} />
+
+            <Route path="orders" element={<AdminOrdersPage />} />
+            <Route path="orders/:id" element={<AdminOrderForm />} />
+
+            <Route path="users" element={<AdminUsersPage />} />
+            <Route path="users/create" element={<AdminUserForm />} />
+            <Route path="users/:id" element={<AdminUserForm />} />
+          </Route>
+        </Route>
+
+        {/* FALLBACK */}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Router>

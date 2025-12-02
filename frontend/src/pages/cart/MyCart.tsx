@@ -48,7 +48,7 @@ const MyCart: React.FC = () => {
           quantity: Number(item.quantity) || 1,
           price: Number(item.price) || Number(product?.price) || 0,
           product_name: product?.title || "Không tìm thấy thông tin",
-          image: product?.cover_image || ""
+          image: product?.cover_image || "",
         };
       });
 
@@ -64,9 +64,10 @@ const MyCart: React.FC = () => {
   useEffect(() => {
     if (!userId) return;
 
-    usersApi.getUser(userId)
+    usersApi
+      .getUser(userId)
       .then((res) => setUserData(res))
-      .catch(() => { });
+      .catch(() => {});
   }, [userId]);
 
   // --------------------------
@@ -78,7 +79,7 @@ const MyCart: React.FC = () => {
     const converted = newCart.map((item) => ({
       book_id: item.book_id,
       quantity: item.quantity,
-      price: item.price
+      price: item.price,
     }));
 
     localStorage.setItem("cart", JSON.stringify(converted));
@@ -137,7 +138,7 @@ const MyCart: React.FC = () => {
       orderStatus: "pending",
       shippingAddress: userData.address,
       paymentMethod,
-      products: JSON.stringify(cart)
+      products: JSON.stringify(cart),
     };
 
     try {
@@ -186,9 +187,19 @@ const MyCart: React.FC = () => {
 
               {/* QUANTITY */}
               <div className="flex items-center space-x-3">
-                <button onClick={() => updateQuantity(item.book_id, -1)} className="px-3 py-1 bg-gray-200 rounded">-</button>
+                <button
+                  onClick={() => updateQuantity(item.book_id, -1)}
+                  className="px-3 py-1 bg-gray-200 rounded"
+                >
+                  -
+                </button>
                 <p>{item.quantity}</p>
-                <button onClick={() => updateQuantity(item.book_id, 1)} className="px-3 py-1 bg-gray-200 rounded">+</button>
+                <button
+                  onClick={() => updateQuantity(item.book_id, 1)}
+                  className="px-3 py-1 bg-gray-200 rounded"
+                >
+                  +
+                </button>
 
                 <p className="font-semibold">
                   {(item.price * item.quantity).toLocaleString()}đ
@@ -216,14 +227,14 @@ const MyCart: React.FC = () => {
       {/* TOTAL + CHECKOUT */}
       <div className="mt-10">
         <p className="text-xl font-bold">
-          Tổng tiền: {getTotalPrice().toLocaleString()}đ
+          Tổng tiền: {getTotalPrice().toLocaleString("vi-VN")}đ
         </p>
 
         <button
-          onClick={handleCheckout}
+          onClick={() => navigate("/checkout")}
           className="bg-blue-600 text-white px-6 py-3 rounded-lg mt-4"
         >
-          Thanh toán
+          Tiếp tục thanh toán
         </button>
       </div>
     </div>
