@@ -96,10 +96,10 @@ const HomeAdmin: React.FC = () => {
 
   return (
     <div className="p-6">
-      <h1 className="text-2xl font-bold mb-6">Tổng quan hệ thống</h1>
+      <h1 className="text-2xl font-bold mb-6 text-black">Tổng quan hệ thống</h1>
 
       {isLoading && (
-        <p className="text-gray-500 text-sm mb-4">
+        <p className="text-black text-sm mb-4">
           Đang tải số liệu thống kê...
         </p>
       )}
@@ -116,8 +116,8 @@ const HomeAdmin: React.FC = () => {
               {isLoading ? "..." : item.value}
             </div>
             <div>
-              <p className="text-gray-500 text-sm">Tổng số</p>
-              <h2 className="text-lg font-semibold">{item.label}</h2>
+              <p className="text-black text-sm">Tổng số</p>
+              <h2 className="text-lg font-semibold text-black">{item.label}</h2>
             </div>
           </div>
         ))}
@@ -125,13 +125,13 @@ const HomeAdmin: React.FC = () => {
 
       <div className="mt-10 grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div className="bg-white p-6 rounded-xl shadow">
-          <h3 className="font-semibold mb-4">Đơn hàng mới</h3>
-          <p className="text-gray-400 text-sm">Chưa có dữ liệu...</p>
+          <h3 className="font-semibold mb-4 text-black">Đơn hàng mới</h3>
+          <p className="text-black text-sm">Chưa có dữ liệu...</p>
         </div>
 
         <div className="bg-white p-6 rounded-xl shadow">
-          <h3 className="font-semibold mb-4">Sản phẩm bán chạy</h3>
-          <p className="text-gray-400 text-sm">Chưa có dữ liệu...</p>
+          <h3 className="font-semibold mb-4 text-black">Sản phẩm bán chạy</h3>
+          <p className="text-black text-sm">Chưa có dữ liệu...</p>
         </div>
       </div>
     </div>

@@ -34,35 +34,35 @@ const AdminAuthorsPage = () => {
       </div>
 
       {!authors || authors.length === 0 ? (
-        <p className="text-gray-400 text-sm">Chưa có tác giả nào.</p>
+        <p className="text-black text-sm">Chưa có tác giả nào.</p>
       ) : (
         <table className="w-full border text-sm">
           <thead>
             <tr className="bg-gray-100">
-              <th className="border p-2 text-left">Tên tác giả</th>
-              <th className="border p-2 text-left">Tiểu sử</th>
-              <th className="border p-2 text-left">Ngày sinh</th>
-              <th className="border p-2 text-left">Quốc gia</th>
-              <th className="border p-2 text-center w-[160px]">Thao tác</th>
+              <th className="border p-2 text-left text-black">Tên tác giả</th>
+              <th className="border p-2 text-left text-black">Tiểu sử</th>
+              <th className="border p-2 text-left text-black">Ngày sinh</th>
+              <th className="border p-2 text-left text-black">Quốc gia</th>
+              <th className="border p-2 text-center w-[160px] text-black">Thao tác</th>
             </tr>
           </thead>
           <tbody>
             {authors.map((author: any) => (
               <tr key={author.author_id}>
-                <td className="border p-2 font-medium">{author.name}</td>
-                <td className="border p-2">
+                <td className="border p-2 font-medium text-black">{author.name}</td>
+                <td className="border p-2 text-black">
                   {author.bio ? (
                     <span className="line-clamp-2">{author.bio}</span>
                   ) : (
-                    <span className="text-gray-400">-</span>
+                    <span className="text-black">-</span>
                   )}
                 </td>
-                <td className="border p-2">
+                <td className="border p-2 text-black">
                   {author.birth_date
                     ? new Date(author.birth_date).toLocaleDateString("vi-VN")
                     : "-"}
                 </td>
-                <td className="border p-2">{author.country || "-"}</td>
+                <td className="border p-2 text-black">{author.country || "-"}</td>
                 <td className="border p-2">
                   <div className="flex justify-center gap-2">
                     <Link

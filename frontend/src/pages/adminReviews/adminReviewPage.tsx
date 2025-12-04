@@ -39,7 +39,7 @@ const AdminReviewsPage = () => {
             ★
           </span>
         ))}
-        <span className="ml-1 text-xs text-gray-600">({rating}/5)</span>
+        <span className="ml-1 text-xs text-black">({rating}/5)</span>
       </div>
     );
   };
@@ -55,7 +55,7 @@ const AdminReviewsPage = () => {
       </div>
 
       {!reviews || reviews.length === 0 ? (
-        <p className="text-gray-400 text-sm">Chưa có đánh giá nào.</p>
+        <p className="text-black text-sm">Chưa có đánh giá nào.</p>
       ) : (
         <div className="overflow-x-auto">
           <table className="w-full border text-sm">

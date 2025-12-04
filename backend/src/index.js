@@ -57,6 +57,15 @@ app.post("/upload-image", upload.single("image"), async (req, res) => {
 // Serve local images
 app.use("/images", express.static(path.join(__dirname, "uploads")));
 
+// Error handler middleware
+app.use((err, req, res, next) => {
+  console.error("Error:", err);
+  res.status(err.status || 500).json({
+    message: err.message || "Internal server error",
+    error: process.env.NODE_ENV === "development" ? err : {},
+  });
+});
+
 app.listen(process.env.PORT || 4000, () => {
   console.log("Server running");
 });

@@ -53,13 +53,13 @@ const Register = () => {
       className="flex flex-col gap-4 p-6 max-w-md mx-auto bg-[#F8F1E8] shadow-lg rounded-lg"
       onSubmit={onSubmit}
     >
-      <h2 className="text-2xl font-bold text-center text-[#6B4F3A]">Tạo tài khoản</h2>
+      <h2 className="text-2xl font-bold text-center text-orange-600">Tạo tài khoản</h2>
 
       <div className="flex gap-4">
         <label className="flex-1 text-sm font-medium">
           Họ
           <input
-            className="border rounded w-full py-2 px-3 mt-1"
+            className="bg-transparent border border-black rounded w-full py-2 px-3 mt-1 text-black placeholder:text-gray-500"
             {...register("firstName", { required: "Không được bỏ trống" })}
           />
           {errors.firstName && <p className="text-red-500 text-xs">{errors.firstName.message}</p>}
@@ -68,7 +68,7 @@ const Register = () => {
         <label className="flex-1 text-sm font-medium">
           Tên
           <input
-            className="border rounded w-full py-2 px-3 mt-1"
+            className="bg-transparent border border-black rounded w-full py-2 px-3 mt-1 text-black placeholder:text-gray-500"
             {...register("lastName", { required: "Không được bỏ trống" })}
           />
           {errors.lastName && <p className="text-red-500 text-xs">{errors.lastName.message}</p>}
@@ -79,7 +79,7 @@ const Register = () => {
         Email
         <input
           type="email"
-          className="border rounded w-full py-2 px-3 mt-1"
+          className="bg-transparent border border-black rounded w-full py-2 px-3 mt-1 text-black placeholder:text-gray-500"
           {...register("email", { 
             required: "Không được bỏ trống",
             pattern: {
@@ -95,7 +95,7 @@ const Register = () => {
         Số điện thoại
         <input
           type="tel"
-          className="border rounded w-full py-2 px-3 mt-1"
+          className="bg-transparent border border-black rounded w-full py-2 px-3 mt-1 text-black placeholder:text-gray-500"
           {...register("phone", { 
             required: "Không được bỏ trống",
             pattern: {
@@ -111,7 +111,7 @@ const Register = () => {
         Mật khẩu
         <input
           type="password"
-          className="border rounded w-full py-2 px-3 mt-1"
+          className="bg-transparent border border-black rounded w-full py-2 px-3 mt-1 text-black placeholder:text-gray-500"
           {...register("password", {
             required: "Không được bỏ trống",
             minLength: { value: 6, message: "Tối thiểu 6 ký tự" },
@@ -124,7 +124,7 @@ const Register = () => {
         Nhập lại mật khẩu
         <input
           type="password"
-          className="border rounded w-full py-2 px-3 mt-1"
+          className="bg-transparent border border-black rounded w-full py-2 px-3 mt-1 text-black placeholder:text-gray-500"
           {...register("confirmPassword", {
             required: "Không được bỏ trống",
             validate: (val) => val === watch("password") || "Mật khẩu không trùng khớp",
@@ -134,7 +134,7 @@ const Register = () => {
       </label>
 
       <button
-        className="bg-[#6B4F3A] text-white py-2 mt-3 rounded hover:bg-[#593F2D] transition"
+        className="bg-orange-500 hover:bg-orange-600 text-white py-2 mt-3 rounded transition"
       >
         Tạo Tài Khoản
       </button>

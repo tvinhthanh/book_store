@@ -34,7 +34,7 @@ const SignOutButton = () => {
         transition duration-200
         ${isLoading
           ? "text-gray-400 cursor-not-allowed"
-          : "hover:text-red-500 text-white"
+          : "hover:text-red-500 text-orange-500"
         }
       `}
     >

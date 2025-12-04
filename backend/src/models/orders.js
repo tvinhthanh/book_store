@@ -13,7 +13,16 @@ const Orders = {
     return rows[0] || null;
   },
 
+  getByCustomerId: async (customerId) => {
+    const [rows] = await db.execute(
+      "SELECT * FROM orders WHERE customer_id = ? ORDER BY order_date DESC",
+      [customerId]
+    );
+    return rows;
+  },
+
   create: async (data) => {
+    // Kiểm tra xem bảng có cột created_at không, nếu có thì thêm vào
     const sql = `
       INSERT INTO orders (order_id, customer_id, status, total_amount, payment_method)
       VALUES (?, ?, ?, ?, ?)

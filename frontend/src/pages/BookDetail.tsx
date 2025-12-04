@@ -81,19 +81,19 @@ const BookDetail: React.FC = () => {
 
   if (isLoading) {
     return (
-      <div className="min-h-[50vh] flex items-center justify-center bg-[#f9f3ea]">
-        <p className="text-sm text-slate-500">Đang tải chi tiết sách...</p>
+      <div className="min-h-[50vh] flex items-center justify-center bg-transparent">
+        <p className="text-sm text-black">Đang tải chi tiết sách...</p>
       </div>
     );
   }
 
   if (isError || !book) {
     return (
-      <div className="min-h-[50vh] flex flex-col items-center justify-center gap-3 bg-[#f9f3ea]">
+      <div className="min-h-[50vh] flex flex-col items-center justify-center gap-3 bg-transparent">
         <p className="text-sm text-red-500">Không tìm thấy sách.</p>
         <button
           onClick={() => navigate(-1)}
-          className="text-sm text-[#c8a97e] hover:underline"
+          className="text-sm text-orange-600 hover:underline"
         >
           Quay lại
         </button>
@@ -102,62 +102,62 @@ const BookDetail: React.FC = () => {
   }
 
   return (
-    <main className="bg-[#f9f3ea]">
-      <div className="max-w-5xl mx-auto px-4 py-8 lg:py-10">
+    <main className="bg-transparent min-h-screen py-8">
+      <div className="max-w-6xl mx-auto px-4">
         {/* nút quay lại */}
         <button
           onClick={() => navigate(-1)}
-          className="mb-4 inline-flex items-center gap-2 text-sm text-slate-600 hover:text-[#c8a97e] transition-colors"
+          className="mb-6 inline-flex items-center gap-2 text-sm text-black hover:text-orange-600 transition-colors"
         >
           <AiOutlineArrowLeft />
           <span>Quay lại</span>
         </button>
 
         {/* card chi tiết */}
-        <div className="rounded-3xl bg-gradient-to-br from-black via-[#171616] to-black text-[#f4ede4] shadow-2xl overflow-hidden border border-[#3b2a1a]/70">
+        <div className="bg-white rounded-2xl shadow-xl overflow-hidden border-2 border-orange-200">
           <div className="flex flex-col lg:flex-row">
             {/* ảnh sách */}
-            <div className="lg:w-2/5 border-b lg:border-b-0 lg:border-r border-white/5 bg-[#111] flex items-center justify-center p-6">
+            <div className="lg:w-2/5 bg-gray-50 flex items-center justify-center p-8 border-b lg:border-b-0 lg:border-r border-orange-200">
               {book.cover_image ? (
                 <img
                   src={book.cover_image}
                   alt={book.title}
-                  className="w-full max-w-xs rounded-2xl object-cover shadow-lg shadow-black/70"
+                  className="w-full max-w-xs rounded-xl object-cover shadow-lg"
                 />
               ) : (
-                <div className="w-full max-w-xs aspect-[3/4] rounded-2xl bg-zinc-800 border border-zinc-700 flex items-center justify-center text-sm text-zinc-400">
+                <div className="w-full max-w-xs aspect-[3/4] rounded-xl bg-gray-200 border-2 border-orange-200 flex items-center justify-center text-sm text-black">
                   Không có ảnh bìa
                 </div>
               )}
             </div>
 
             {/* thông tin sách */}
-            <div className="lg:w-3/5 p-6 lg:p-8 flex flex-col gap-5">
+            <div className="lg:w-3/5 p-6 lg:p-8 flex flex-col gap-6">
               <div>
-                <p className="text-xs tracking-[0.22em] uppercase text-[#c8a97e]/70 mb-2">
+                <p className="text-xs tracking-[0.22em] uppercase text-orange-600/70 mb-2">
                   Book detail
                 </p>
-                <h1 className="text-2xl lg:text-3xl font-bold leading-snug">
+                <h1 className="text-2xl lg:text-3xl font-bold leading-snug text-black mb-2">
                   {book.title}
                 </h1>
                 {book.isbn && (
-                  <p className="text-xs text-zinc-400 mt-1">
+                  <p className="text-xs text-black/60 mt-1">
                     ISBN: {book.isbn}
                   </p>
                 )}
               </div>
 
-              <div className="flex items-center gap-6">
+              <div className="flex items-center gap-8">
                 <div>
-                  <p className="text-xs text-zinc-400 mb-1">Giá bán</p>
-                  <p className="text-2xl font-semibold text-[#c8a97e]">
+                  <p className="text-xs text-black/60 mb-1">Giá bán</p>
+                  <p className="text-3xl font-bold text-orange-600">
                     {book.price.toLocaleString()}đ
                   </p>
                 </div>
                 {typeof book.stock_quantity === "number" && (
                   <div>
-                    <p className="text-xs text-zinc-400 mb-1">Tồn kho</p>
-                    <p className="text-sm">
+                    <p className="text-xs text-black/60 mb-1">Tồn kho</p>
+                    <p className="text-lg font-semibold text-black">
                       {book.stock_quantity > 0
                         ? `${book.stock_quantity} cuốn`
                         : "Hết hàng"}
@@ -168,8 +168,8 @@ const BookDetail: React.FC = () => {
 
               {book.description && (
                 <div>
-                  <p className="text-xs text-zinc-400 mb-1">Giới thiệu</p>
-                  <p className="text-sm text-zinc-200 leading-relaxed max-h-40 overflow-y-auto pr-1">
+                  <p className="text-sm font-semibold text-black mb-2">Giới thiệu</p>
+                  <p className="text-sm text-black leading-relaxed max-h-48 overflow-y-auto pr-2">
                     {book.description}
                   </p>
                 </div>
@@ -179,24 +179,28 @@ const BookDetail: React.FC = () => {
                 <button
                   onClick={handleAddToCart}
                   disabled={inCart}
-                  className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium shadow-md transition-colors ${
+                  className={`inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-medium shadow-md transition-all ${
                     inCart
-                      ? "bg-zinc-700 text-zinc-300 cursor-default"
-                      : "bg-[#c8a97e] text-[#2f2f2f] hover:bg-[#b48c66]"
+                      ? "bg-gray-300 text-gray-600 cursor-not-allowed"
+                      : "bg-orange-500 text-white hover:bg-orange-600 hover:scale-105"
                   }`}
                 >
-                  <AiOutlineShoppingCart />
+                  <AiOutlineShoppingCart size={18} />
                   <span>{inCart ? "Đã trong giỏ" : "Thêm vào giỏ"}</span>
                 </button>
 
                 <button
                   onClick={handleToggleFavorite}
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium border border-[#c8a97e]/70 text-[#c8a97e] hover:bg-[#c8a97e]/10 transition-colors"
+                  className={`inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-medium border-2 transition-all ${
+                    favorited
+                      ? "border-orange-500 bg-orange-50 text-orange-600"
+                      : "border-orange-200 text-black hover:border-orange-400 hover:bg-orange-50"
+                  }`}
                 >
                   {favorited ? (
-                    <AiFillHeart className="text-[#ff6b81]" />
+                    <AiFillHeart className="text-red-500" size={18} />
                   ) : (
-                    <AiOutlineHeart />
+                    <AiOutlineHeart size={18} />
                   )}
                   <span>
                     {favorited ? "Đã yêu thích" : "Thêm vào yêu thích"}
@@ -204,20 +208,20 @@ const BookDetail: React.FC = () => {
                 </button>
               </div>
 
-              <div className="mt-3 flex flex-wrap gap-4 text-xs text-zinc-400">
+              <div className="mt-4 pt-4 border-t border-orange-200 flex flex-wrap gap-6 text-sm">
                 {book.language && (
-                  <span>
-                    Ngôn ngữ:{" "}
-                    <span className="text-zinc-200">{book.language}</span>
-                  </span>
+                  <div>
+                    <span className="text-black/60">Ngôn ngữ: </span>
+                    <span className="text-black font-medium">{book.language}</span>
+                  </div>
                 )}
                 {book.published_date && (
-                  <span>
-                    Ngày xuất bản:{" "}
-                    <span className="text-zinc-200">
-                      {new Date(book.published_date).toLocaleDateString()}
+                  <div>
+                    <span className="text-black/60">Ngày xuất bản: </span>
+                    <span className="text-black font-medium">
+                      {new Date(book.published_date).toLocaleDateString("vi-VN")}
                     </span>
-                  </span>
+                  </div>
                 )}
               </div>
             </div>

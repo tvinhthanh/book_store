@@ -141,7 +141,7 @@ const AdminSettings = () => {
   return (
     <div className="space-y-6">
       <div className="bg-white p-6 rounded-xl shadow">
-        <h2 className="text-2xl font-bold text-gray-800 mb-6">
+        <h2 className="text-2xl font-bold text-black mb-6">
           Thông tin hệ thống
         </h2>
 
@@ -157,10 +157,10 @@ const AdminSettings = () => {
                   {stat.icon}
                 </div>
               </div>
-              <h3 className="text-sm font-medium text-gray-600 mb-1">
+              <h3 className="text-sm font-medium text-black mb-1">
                 {stat.title}
               </h3>
-              <p className={`text-3xl font-bold ${stat.textColor}`}>
+              <p className="text-3xl font-bold text-black">
                 {stat.value.toLocaleString()}
               </p>
             </div>
@@ -171,19 +171,19 @@ const AdminSettings = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Financial Summary */}
           <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-xl border border-blue-100">
-            <h3 className="text-lg font-semibold text-gray-800 mb-4">
+            <h3 className="text-lg font-semibold text-black mb-4">
               Tổng quan tài chính
             </h3>
             <div className="space-y-3">
               <div className="flex justify-between items-center">
-                <span className="text-gray-600">Tổng giá trị kho:</span>
-                <span className="text-xl font-bold text-green-600">
+                <span className="text-black">Tổng giá trị kho:</span>
+                <span className="text-xl font-bold text-black">
                   {totalStockValue.toLocaleString()}₫
                 </span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-gray-600">Tổng giá trị đơn hàng:</span>
-                <span className="text-xl font-bold text-blue-600">
+                <span className="text-black">Tổng giá trị đơn hàng:</span>
+                <span className="text-xl font-bold text-black">
                   {totalOrdersValue.toLocaleString()}₫
                 </span>
               </div>
@@ -192,23 +192,23 @@ const AdminSettings = () => {
 
           {/* User Statistics */}
           <div className="bg-gradient-to-br from-purple-50 to-pink-50 p-6 rounded-xl border border-purple-100">
-            <h3 className="text-lg font-semibold text-gray-800 mb-4">
+            <h3 className="text-lg font-semibold text-black mb-4">
               Thống kê người dùng
             </h3>
             <div className="space-y-3">
               <div className="flex justify-between items-center">
-                <span className="text-gray-600">Tổng người dùng:</span>
-                <span className="text-xl font-bold">{totalUsers}</span>
+                <span className="text-black">Tổng người dùng:</span>
+                <span className="text-xl font-bold text-black">{totalUsers}</span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-gray-600">Admin:</span>
-                <span className="text-xl font-bold text-red-600">
+                <span className="text-black">Admin:</span>
+                <span className="text-xl font-bold text-black">
                   {adminUsers}
                 </span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-gray-600">Người dùng thường:</span>
-                <span className="text-xl font-bold text-blue-600">
+                <span className="text-black">Người dùng thường:</span>
+                <span className="text-xl font-bold text-black">
                   {regularUsers}
                 </span>
               </div>
@@ -217,35 +217,35 @@ const AdminSettings = () => {
 
           {/* Order Statistics */}
           <div className="bg-gradient-to-br from-green-50 to-emerald-50 p-6 rounded-xl border border-green-100">
-            <h3 className="text-lg font-semibold text-gray-800 mb-4">
+            <h3 className="text-lg font-semibold text-black mb-4">
               Thống kê đơn hàng
             </h3>
             <div className="space-y-3">
               <div className="flex justify-between items-center">
-                <span className="text-gray-600">Tổng đơn hàng:</span>
-                <span className="text-xl font-bold">{totalOrders}</span>
+                <span className="text-black">Tổng đơn hàng:</span>
+                <span className="text-xl font-bold text-black">{totalOrders}</span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-gray-600">Chờ xử lý:</span>
-                <span className="text-lg font-semibold text-yellow-600">
+                <span className="text-black">Chờ xử lý:</span>
+                <span className="text-lg font-semibold text-black">
                   {pendingOrders}
                 </span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-gray-600">Đã thanh toán:</span>
-                <span className="text-lg font-semibold text-blue-600">
+                <span className="text-black">Đã thanh toán:</span>
+                <span className="text-lg font-semibold text-black">
                   {paidOrders}
                 </span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-gray-600">Đã giao hàng:</span>
-                <span className="text-lg font-semibold text-green-600">
+                <span className="text-black">Đã giao hàng:</span>
+                <span className="text-lg font-semibold text-black">
                   {deliveredOrders}
                 </span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-gray-600">Đang vận chuyển:</span>
-                <span className="text-lg font-semibold text-purple-600">
+                <span className="text-black">Đang vận chuyển:</span>
+                <span className="text-lg font-semibold text-black">
                   {shippedOrders}
                 </span>
               </div>
@@ -254,18 +254,18 @@ const AdminSettings = () => {
 
           {/* Review Statistics */}
           <div className="bg-gradient-to-br from-yellow-50 to-amber-50 p-6 rounded-xl border border-yellow-100">
-            <h3 className="text-lg font-semibold text-gray-800 mb-4">
+            <h3 className="text-lg font-semibold text-black mb-4">
               Thống kê đánh giá
             </h3>
             <div className="space-y-3">
               <div className="flex justify-between items-center">
-                <span className="text-gray-600">Tổng đánh giá:</span>
-                <span className="text-xl font-bold">{totalReviews}</span>
+                <span className="text-black">Tổng đánh giá:</span>
+                <span className="text-xl font-bold text-black">{totalReviews}</span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-gray-600">Đánh giá trung bình:</span>
+                <span className="text-black">Đánh giá trung bình:</span>
                 <div className="flex items-center gap-2">
-                  <span className="text-xl font-bold text-yellow-600">
+                  <span className="text-xl font-bold text-black">
                     {averageRating}
                   </span>
                   <div className="flex">
@@ -290,27 +290,27 @@ const AdminSettings = () => {
 
         {/* System Information */}
         <div className="mt-6 bg-gray-50 p-6 rounded-xl border border-gray-200">
-          <h3 className="text-lg font-semibold text-gray-800 mb-4">
+          <h3 className="text-lg font-semibold text-black mb-4">
             Thông tin hệ thống
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
             <div>
-              <span className="text-gray-600">Tên hệ thống:</span>
-              <span className="ml-2 font-medium">Book Store Management System</span>
+              <span className="text-black">Tên hệ thống:</span>
+              <span className="ml-2 font-medium text-black">Book Store Management System</span>
             </div>
             <div>
-              <span className="text-gray-600">Phiên bản:</span>
-              <span className="ml-2 font-medium">1.0.0</span>
+              <span className="text-black">Phiên bản:</span>
+              <span className="ml-2 font-medium text-black">1.0.0</span>
             </div>
             <div>
-              <span className="text-gray-600">Ngày cập nhật:</span>
-              <span className="ml-2 font-medium">
+              <span className="text-black">Ngày cập nhật:</span>
+              <span className="ml-2 font-medium text-black">
                 {new Date().toLocaleDateString("vi-VN")}
               </span>
             </div>
             <div>
-              <span className="text-gray-600">Trạng thái:</span>
-              <span className="ml-2 font-medium text-green-600">Hoạt động</span>
+              <span className="text-black">Trạng thái:</span>
+              <span className="ml-2 font-medium text-black">Hoạt động</span>
             </div>
           </div>
         </div>

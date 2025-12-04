@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { useMutation, useQuery } from "react-query";
 import { useNavigate, useParams } from "react-router-dom";
 import { ordersApi } from "../../services/orders.service";
+import { booksApi } from "../../services/books.service";
 
 type OrderFormValues = {
   customer_id: string;
@@ -19,7 +20,7 @@ const AdminOrderForm = () => {
 
   const { register, handleSubmit, reset } = useForm<OrderFormValues>();
 
-  // Nếu edit thì load dữ liệu đơn hàng
+  // Nếu edit thì load dữ liệu đơn hàng (bao gồm items)
   const { data: order, isLoading } = useQuery(
     ["admin-order", id],
     () => ordersApi.getById(id as string),
@@ -27,6 +28,11 @@ const AdminOrderForm = () => {
       enabled: isEdit,
     }
   );
+
+  // Load thông tin sách cho order items
+  const { data: allBooks } = useQuery(["all-books"], booksApi.getAll, {
+    enabled: isEdit && !!order?.items,
+  });
 
   useEffect(() => {
     if (order) {
@@ -69,10 +75,59 @@ const AdminOrderForm = () => {
         {isEdit ? "Cập nhật đơn hàng" : "Tạo đơn hàng mới"}
       </h2>
 
-      {isEdit && (
-        <div className="mb-4 text-sm text-gray-500">
-          Mã đơn hàng: <span className="font-mono">{id}</span>
-        </div>
+      {isEdit && order && (
+        <>
+          <div className="mb-4 text-sm text-black">
+            Mã đơn hàng: <span className="font-mono">{id}</span>
+          </div>
+          
+          {order.order_date && (
+            <div className="mb-4 text-sm text-black">
+              Ngày đặt:{" "}
+              {new Date(order.order_date).toLocaleString("vi-VN")}
+            </div>
+          )}
+
+          {/* CHI TIẾT ĐƠN HÀNG */}
+          {order.items && order.items.length > 0 && (
+            <div className="mb-6 p-4 bg-gray-50 rounded-lg">
+              <h3 className="font-semibold mb-3 text-sm text-black">Chi tiết đơn hàng:</h3>
+              <div className="space-y-2">
+                {order.items.map((item: any) => {
+                  const book = allBooks?.find(
+                    (b: any) => b.book_id === item.book_id
+                  );
+                  return (
+                    <div
+                      key={item.order_item_id}
+                      className="flex justify-between items-center text-sm border-b pb-2"
+                    >
+                      <div className="flex-1">
+                        <p className="font-medium text-black">
+                          {book?.title || `Sách ID: ${item.book_id}`}
+                        </p>
+                        <p className="text-black">
+                          SL: {item.quantity} x{" "}
+                          {Number(item.price).toLocaleString("vi-VN")}₫
+                        </p>
+                      </div>
+                      <p className="font-semibold text-black">
+                        {(item.quantity * Number(item.price)).toLocaleString(
+                          "vi-VN"
+                        )}
+                        ₫
+                      </p>
+                    </div>
+                  );
+                })}
+              </div>
+              <div className="mt-3 pt-3 border-t flex justify-between font-bold text-black">
+                <span>Tổng cộng:</span>
+                <span>{Number(order.total_amount).toLocaleString("vi-VN")}₫</span>
+              </div>
+            </div>
+          )}
+        </>
       )}
 
       <div className="mb-4">
@@ -103,9 +158,9 @@ const AdminOrderForm = () => {
           {...register("payment_method", { required: true })}
         >
           <option value="cash">Tiền mặt</option>
-          <option value="card">Thẻ</option>
-          <option value="transfer">Chuyển khoản</option>
-          {/* nếu DB bạn lưu kiểu khác thì chỉnh lại value cho khớp */}
+          <option value="credit_card">Thẻ tín dụng</option>
+          <option value="bank_transfer">Chuyển khoản ngân hàng</option>
+          <option value="paypal">PayPal</option>
         </select>
       </div>
 
@@ -118,8 +173,9 @@ const AdminOrderForm = () => {
           {...register("status", { required: true })}
         >
           <option value="pending">Chờ xử lý</option>
-          <option value="processing">Đang xử lý</option>
-          <option value="completed">Hoàn thành</option>
+          <option value="paid">Đã thanh toán</option>
+          <option value="shipped">Đã giao hàng</option>
+          <option value="delivered">Đã nhận hàng</option>
           <option value="cancelled">Đã hủy</option>
         </select>
       </div>

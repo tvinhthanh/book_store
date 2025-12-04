@@ -155,10 +155,10 @@ const MyCart: React.FC = () => {
   // --------------------------
   return (
     <div className="max-w-7xl mx-auto py-10 px-4">
-      <h1 className="text-3xl font-bold mb-6">Giỏ hàng của bạn</h1>
+      <h1 className="text-3xl font-bold mb-6 text-black">Giỏ hàng của bạn</h1>
 
       {cart.length === 0 ? (
-        <p>Giỏ hàng trống.</p>
+        <p className="text-black">Giỏ hàng trống.</p>
       ) : (
         <>
           {cart.map((item) => (
@@ -175,33 +175,33 @@ const MyCart: React.FC = () => {
                     className="w-full h-full object-cover"
                   />
                 ) : (
-                  <span>No Image</span>
+                  <span className="text-black">No Image</span>
                 )}
               </div>
 
               {/* INFO */}
               <div className="flex-1">
-                <h3 className="text-lg font-bold">{item.product_name}</h3>
-                <p>Giá: {item.price.toLocaleString()}đ</p>
+                <h3 className="text-lg font-bold text-black">{item.product_name}</h3>
+                <p className="text-black">Giá: {item.price.toLocaleString()}đ</p>
               </div>
 
               {/* QUANTITY */}
               <div className="flex items-center space-x-3">
                 <button
                   onClick={() => updateQuantity(item.book_id, -1)}
-                  className="px-3 py-1 bg-gray-200 rounded"
+                  className="px-3 py-1 bg-gray-200 rounded text-black hover:bg-gray-300"
                 >
                   -
                 </button>
-                <p>{item.quantity}</p>
+                <p className="text-black">{item.quantity}</p>
                 <button
                   onClick={() => updateQuantity(item.book_id, 1)}
-                  className="px-3 py-1 bg-gray-200 rounded"
+                  className="px-3 py-1 bg-gray-200 rounded text-black hover:bg-gray-300"
                 >
                   +
                 </button>
 
-                <p className="font-semibold">
+                <p className="font-semibold text-black">
                   {(item.price * item.quantity).toLocaleString()}đ
                 </p>
               </div>
@@ -226,13 +226,13 @@ const MyCart: React.FC = () => {
 
       {/* TOTAL + CHECKOUT */}
       <div className="mt-10">
-        <p className="text-xl font-bold">
+        <p className="text-xl font-bold text-black">
           Tổng tiền: {getTotalPrice().toLocaleString("vi-VN")}đ
         </p>
 
         <button
           onClick={() => navigate("/checkout")}
-          className="bg-blue-600 text-white px-6 py-3 rounded-lg mt-4"
+          className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-lg mt-4"
         >
           Tiếp tục thanh toán
         </button>

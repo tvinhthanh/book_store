@@ -17,7 +17,7 @@ const CategoryIcons = ({ categories, maxItems = 8 }: CategoryIconsProps) => {
   if (!categories || categories.length === 0) return null;
 
   return (
-    <section className="bg-white py-6 border-b w-full">
+    <section className="bg-transparent py-6 border-b w-full">
       <div className="w-full px-4">
         <div className="flex items-center justify-between overflow-x-auto gap-4 pb-2 w-full">
           {categories.slice(0, maxItems).map((cat) => (

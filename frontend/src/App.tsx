@@ -14,6 +14,7 @@ import Home from "./pages/Home";
 import MyCart from "./pages/cart/MyCart";
 import BookDetail from "./pages/BookDetail";
 import CategoryBooks from "./components/CategoriesBook";
+import UserBooksPage from "./pages/BooksPage";
 
 // ADMIN PAGES
 // import BooksPage from "./pages/books/BooksPage";
@@ -80,6 +81,14 @@ const App = () => {
           element={
             <Layout>
               <SignIn />
+            </Layout>
+          }
+        />
+        <Route
+          path="/books"
+          element={
+            <Layout>
+              <UserBooksPage />
             </Layout>
           }
         />

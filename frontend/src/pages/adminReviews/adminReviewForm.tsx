@@ -127,7 +127,7 @@ const AdminReviewForm = () => {
           </select>
           {isEdit && review && (
             <div className="mt-2 flex items-center gap-2">
-              <span className="text-sm text-gray-600">Hiện tại:</span>
+              <span className="text-sm text-black">Hiện tại:</span>
               <div className="flex items-center gap-1">
                 {[1, 2, 3, 4, 5].map((star) => (
                   <span

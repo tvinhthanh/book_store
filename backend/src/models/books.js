@@ -65,6 +65,28 @@ const Books = {
     ]);
     return result;
   },
+
+  // Trừ số lượng tồn kho
+  decreaseStock: async (book_id, quantity) => {
+    const sql = `
+      UPDATE books
+      SET stock_quantity = GREATEST(0, stock_quantity - ?)
+      WHERE book_id = ?
+    `;
+    const [result] = await db.execute(sql, [quantity, book_id]);
+    return result;
+  },
+
+  // Tăng số lượng tồn kho (khi hủy đơn)
+  increaseStock: async (book_id, quantity) => {
+    const sql = `
+      UPDATE books
+      SET stock_quantity = stock_quantity + ?
+      WHERE book_id = ?
+    `;
+    const [result] = await db.execute(sql, [quantity, book_id]);
+    return result;
+  },
 };
 
 module.exports = Books;

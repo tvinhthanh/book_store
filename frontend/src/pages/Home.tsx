@@ -5,6 +5,7 @@ import { booksApi } from "../services/books.service";
 import { categoriesApi } from "../services/categories.service";
 import { useAppContext } from "../contexts/AppContext";
 import PromotionalBanner from "../components/home/PromotionalBanner";
+import SaleBanner from "../components/home/SaleBanner";
 import MainPromotionalBanners from "../components/home/MainPromotionalBanners";
 import SmallPromoBanners from "../components/home/SmallPromoBanners";
 import CategoryIcons from "../components/home/CategoryIcons";
@@ -89,6 +90,9 @@ const Home: React.FC = () => {
     <main className="min-h-screen bg-white">
       {/* Top Promotional Banner */}
       <PromotionalBanner />
+
+      {/* Sale Banner với 5 hình ảnh */}
+      <SaleBanner />
 
       {/* Main Promotional Banners */}
       <MainPromotionalBanners />

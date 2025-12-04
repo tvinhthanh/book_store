@@ -77,12 +77,12 @@ const Header = () => {
                 </button>
 
                 {openCat && (
-                  <div className="absolute left-0 top-full mt-2 w-56 bg-[#1f1e1c] border border-[#3b2a1a] rounded-xl shadow-xl overflow-hidden">
+                  <div className="absolute left-0 top-full mt-2 w-56 bg-transparent border border-orange-200 rounded-xl shadow-xl overflow-hidden backdrop-blur-sm">
                     {categories.map((cat) => (
                       <button
                         key={cat.category_id}
                         onClick={() => handleCategoryClick(cat.category_id)}
-                        className="w-full text-left px-4 py-2 text-sm text-gray-800 hover:bg-orange-50 hover:text-orange-600 transition"
+                        className="w-full text-left px-4 py-2 text-sm text-black hover:bg-orange-50 hover:text-orange-600 transition bg-white/95"
                       >
                         {cat.name}
                       </button>
@@ -92,17 +92,17 @@ const Header = () => {
               </li>
 
               <li>
-                <Link to="/books" className="hover:text-[#c8a97e]">
+                <Link to="/books" className="hover:text-orange-600">
                   Sách
                 </Link>
               </li>
               <li>
-                <Link to="/cart" className="hover:text-[#c8a97e]">
+                <Link to="/cart" className="hover:text-orange-600">
                   Giỏ hàng
                 </Link>
               </li>
               <li>
-                <Link to="/my-orders" className="hover:text-[#c8a97e]">
+                <Link to="/my-orders" className="hover:text-orange-600">
                   Đơn hàng
                 </Link>
               </li>

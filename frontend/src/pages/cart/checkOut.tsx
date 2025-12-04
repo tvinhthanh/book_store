@@ -72,6 +72,18 @@ const Checkout: React.FC = () => {
 
   const getTotalPrice = () =>
     cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+
+  // Map payment method từ frontend sang database enum
+  const mapPaymentMethod = (method: string): string => {
+    const mapping: { [key: string]: string } = {
+      cash: "cash",
+      card: "credit_card",
+      bank: "bank_transfer",
+      paypal: "paypal",
+    };
+    return mapping[method] || "cash";
+  };
+
   const handleConfirmOrder = async () => {
     if (!userId) {
       alert("Vui lòng đăng nhập trước khi thanh toán");
@@ -94,16 +106,16 @@ const Checkout: React.FC = () => {
         customer_id: userId,
         status: "pending",
         total_amount: getTotalPrice(),
-        payment_method: paymentMethod,
+        payment_method: mapPaymentMethod(paymentMethod),
+        shipping_address: shippingAddress,
       };
 
+      console.log("Creating order with payload:", orderPayload);
       const createdOrder = await ordersApi.create(orderPayload);
+      console.log("Order created:", createdOrder);
 
-      const orderId =
-        createdOrder.order_id ||
-        createdOrder.orderId ||
-        createdOrder.id ||
-        createdOrder?.[0]?.order_id;
+      // Backend trả về order object với order_id
+      const orderId = createdOrder?.order_id;
 
       if (!orderId) {
         console.error(
@@ -114,15 +126,18 @@ const Checkout: React.FC = () => {
         return;
       }
 
+      console.log("Creating order items for order:", orderId);
       await Promise.all(
-        cart.map((item) =>
-          orderItemsApi.create({
+        cart.map((item) => {
+          const itemData = {
             order_id: orderId,
             book_id: item.book_id,
             quantity: item.quantity,
             price: item.price,
-          })
-        )
+          };
+          console.log("Creating order item:", itemData);
+          return orderItemsApi.create(itemData);
+        })
       );
 
       alert("Đặt hàng thành công!");
@@ -139,16 +154,17 @@ const Checkout: React.FC = () => {
       }
 
       navigate("/my-orders");
-    } catch (e) {
-      console.error(e);
-      alert("Thanh toán thất bại, vui lòng thử lại");
+    } catch (e: any) {
+      console.error("Checkout error:", e);
+      const errorMessage = e?.message || "Thanh toán thất bại, vui lòng thử lại";
+      alert(errorMessage);
     }
   };
 
   if (loading) {
     return (
       <div className="max-w-5xl mx-auto py-10 px-4">
-        <p>Đang tải dữ liệu thanh toán...</p>
+        <p className="text-black">Đang tải dữ liệu thanh toán...</p>
       </div>
     );
   }
@@ -156,12 +172,12 @@ const Checkout: React.FC = () => {
   if (cart.length === 0) {
     return (
       <div className="max-w-5xl mx-auto py-10 px-4">
-        <h1 className="text-2xl font-bold mb-4">Thanh toán</h1>
-        <p>
+        <h1 className="text-2xl font-bold mb-4 text-black">Thanh toán</h1>
+        <p className="text-black">
           Giỏ hàng trống. Quay lại trang{" "}
           <span
             onClick={() => navigate("/")}
-            className="text-blue-600 cursor-pointer underline"
+            className="text-orange-600 cursor-pointer underline hover:text-orange-700"
           >
             mua sắm
           </span>
@@ -173,32 +189,32 @@ const Checkout: React.FC = () => {
 
   return (
     <div className="max-w-5xl mx-auto py-10 px-4">
-      <h1 className="text-2xl font-bold mb-6">Thanh toán</h1>
+      <h1 className="text-2xl font-bold mb-6 text-black">Thanh toán</h1>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* THÔNG TIN NGƯỜI NHẬN */}
         <div className="lg:col-span-2 space-y-6">
-          <div className="bg-white p-5 rounded-lg shadow">
-            <h2 className="font-semibold mb-3 text-lg">Thông tin giao hàng</h2>
-            <p className="text-sm">
+          <div className="bg-white p-5 rounded-lg shadow border border-orange-200">
+            <h2 className="font-semibold mb-3 text-lg text-black">Thông tin giao hàng</h2>
+            <p className="text-sm text-black">
               <span className="font-medium">Tên:</span>{" "}
               {userData?.name || "Chưa có"}
             </p>
-            <p className="text-sm">
+            <p className="text-sm text-black">
               <span className="font-medium">Email:</span>{" "}
               {userData?.email || "Chưa có"}
             </p>
-            <p className="text-sm">
+            <p className="text-sm text-black">
               <span className="font-medium">SĐT:</span>{" "}
               {userData?.phone || "Chưa có"}
             </p>
             <div className="mt-4">
-              <label className="block text-sm font-medium mb-1">
+              <label className="block text-sm font-medium mb-1 text-black">
                 Địa chỉ giao hàng
               </label>
 
               <textarea
-                className="border rounded w-full px-3 py-2 text-sm"
+                className="border border-orange-200 rounded w-full px-3 py-2 text-sm bg-transparent text-black placeholder:text-gray-400"
                 rows={3}
                 placeholder="Nhập địa chỉ nhận hàng cụ thể..."
                 value={shippingAddress}
@@ -214,85 +230,99 @@ const Checkout: React.FC = () => {
           </div>
 
           {/* PHƯƠNG THỨC THANH TOÁN */}
-          <div className="bg-white p-5 rounded-lg shadow">
-            <h2 className="font-semibold mb-3 text-lg">
+          <div className="bg-white p-5 rounded-lg shadow border border-orange-200">
+            <h2 className="font-semibold mb-3 text-lg text-black">
               Phương thức thanh toán
             </h2>
 
             <div className="space-y-2 text-sm">
-              <label className="flex items-center gap-2">
+              <label className="flex items-center gap-2 text-black">
                 <input
                   type="radio"
                   value="cash"
                   checked={paymentMethod === "cash"}
                   onChange={(e) => setPaymentMethod(e.target.value)}
+                  className="text-orange-600"
                 />
                 <span>Thanh toán tiền mặt khi nhận hàng</span>
               </label>
 
-              <label className="flex items-center gap-2">
+              <label className="flex items-center gap-2 text-black">
                 <input
                   type="radio"
                   value="card"
                   checked={paymentMethod === "card"}
                   onChange={(e) => setPaymentMethod(e.target.value)}
+                  className="text-orange-600"
                 />
-                <span>Thanh toán bằng thẻ (demo)</span>
+                <span>Thanh toán bằng thẻ tín dụng</span>
               </label>
 
-              <label className="flex items-center gap-2">
+              <label className="flex items-center gap-2 text-black">
                 <input
                   type="radio"
                   value="bank"
                   checked={paymentMethod === "bank"}
                   onChange={(e) => setPaymentMethod(e.target.value)}
+                  className="text-orange-600"
                 />
-                <span>Chuyển khoản ngân hàng (demo)</span>
+                <span>Chuyển khoản ngân hàng</span>
+              </label>
+
+              <label className="flex items-center gap-2 text-black">
+                <input
+                  type="radio"
+                  value="paypal"
+                  checked={paymentMethod === "paypal"}
+                  onChange={(e) => setPaymentMethod(e.target.value)}
+                  className="text-orange-600"
+                />
+                <span>PayPal</span>
               </label>
             </div>
           </div>
         </div>
 
         {/* TÓM TẮT ĐƠN HÀNG */}
-        <div className="bg-white p-5 rounded-lg shadow space-y-4">
-          <h2 className="font-semibold mb-3 text-lg">Đơn hàng của bạn</h2>
+        <div className="bg-white p-5 rounded-lg shadow space-y-4 border border-orange-200">
+          <h2 className="font-semibold mb-3 text-lg text-black">Đơn hàng của bạn</h2>
 
-          <div className="space-y-2 max-h-80 overflow-y-auto border-b pb-3">
+          <div className="space-y-2 max-h-80 overflow-y-auto border-b border-orange-200 pb-3">
             {cart.map((item) => (
               <div key={item.book_id} className="flex justify-between text-sm">
                 <div>
-                  <p className="font-medium">{item.product_name}</p>
-                  <p className="text-gray-400">
+                  <p className="font-medium text-black">{item.product_name}</p>
+                  <p className="text-black">
                     SL: {item.quantity} x {item.price.toLocaleString("vi-VN")}đ
                   </p>
                 </div>
-                <p className="font-semibold">
+                <p className="font-semibold text-black">
                   {(item.price * item.quantity).toLocaleString("vi-VN")}đ
                 </p>
               </div>
             ))}
           </div>
 
-          <div className="flex justify-between text-sm">
+          <div className="flex justify-between text-sm text-black">
             <span>Tạm tính</span>
             <span>{getTotalPrice().toLocaleString("vi-VN")}đ</span>
           </div>
 
-          <div className="flex justify-between text-base font-bold mt-2">
+          <div className="flex justify-between text-base font-bold mt-2 text-black">
             <span>Tổng cộng</span>
-            <span>{getTotalPrice().toLocaleString("vi-VN")}đ</span>
+            <span className="text-orange-600">{getTotalPrice().toLocaleString("vi-VN")}đ</span>
           </div>
 
           <button
             onClick={handleConfirmOrder}
-            className="w-full bg-blue-600 text-white py-3 rounded-lg mt-4 hover:bg-blue-700"
+            className="w-full bg-orange-500 hover:bg-orange-600 text-white py-3 rounded-lg mt-4 transition"
           >
             Xác nhận đặt hàng
           </button>
 
           <button
             onClick={() => navigate("/cart")}
-            className="w-full border border-gray-300 text-gray-700 py-2 rounded-lg mt-2"
+            className="w-full border border-orange-200 text-black py-2 rounded-lg mt-2 hover:bg-orange-50 transition"
           >
             Quay lại giỏ hàng
           </button>

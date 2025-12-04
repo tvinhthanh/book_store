@@ -1,4 +1,5 @@
 export { default as PromotionalBanner } from "./PromotionalBanner";
+export { default as SaleBanner } from "./SaleBanner";
 export { default as MainPromotionalBanners } from "./MainPromotionalBanners";
 export { default as SmallPromoBanners } from "./SmallPromoBanners";
 export { default as CategoryIcons } from "./CategoryIcons";

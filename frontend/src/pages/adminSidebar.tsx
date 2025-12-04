@@ -38,11 +38,11 @@ export default function AdminSidebar({ collapsed, onToggle }: SidebarProps) {
       {/* Logo */}
       <div className="flex items-center justify-between px-4 h-16 border-b">
         {!collapsed ? (
-          <h1 className="text-xl font-bold text-blue-600">Admin</h1>
+          <h1 className="text-xl font-bold text-black">Admin</h1>
         ) : (
           <span />
         )}
-        <button onClick={onToggle} className="p-2 hover:bg-gray-100 rounded-md">
+        <button onClick={onToggle} className="p-2 hover:bg-gray-100 rounded-md text-black">
           {collapsed ? <ChevronRight size={18} /> : <ChevronLeft size={18} />}
         </button>
       </div>
@@ -56,8 +56,8 @@ export default function AdminSidebar({ collapsed, onToggle }: SidebarProps) {
             className={({ isActive }) =>
               `flex items-center gap-3 px-4 py-3 text-sm font-medium
               ${isActive
-                ? "bg-blue-50 text-blue-600 border-r-4 border-blue-500"
-                : "text-gray-700"
+                ? "bg-gray-100 text-black border-r-4 border-orange-500"
+                : "text-black"
               }
               hover:bg-gray-100`
             }

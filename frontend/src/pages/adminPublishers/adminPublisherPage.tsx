@@ -34,25 +34,25 @@ const AdminPublishersPage = () => {
       </div>
 
       {!publishers || publishers.length === 0 ? (
-        <p className="text-gray-400 text-sm">Chưa có nhà xuất bản nào.</p>
+        <p className="text-black text-sm">Chưa có nhà xuất bản nào.</p>
       ) : (
         <table className="w-full border text-sm">
           <thead>
             <tr className="bg-gray-100">
-              <th className="border p-2 text-left">Tên nhà xuất bản</th>
-              <th className="border p-2 text-left">Địa chỉ</th>
-              <th className="border p-2 text-left">Email</th>
-              <th className="border p-2 text-left">Số điện thoại</th>
-              <th className="border p-2 text-center w-[160px]">Thao tác</th>
+              <th className="border p-2 text-left text-black">Tên nhà xuất bản</th>
+              <th className="border p-2 text-left text-black">Địa chỉ</th>
+              <th className="border p-2 text-left text-black">Email</th>
+              <th className="border p-2 text-left text-black">Số điện thoại</th>
+              <th className="border p-2 text-center w-[160px] text-black">Thao tác</th>
             </tr>
           </thead>
           <tbody>
             {publishers.map((publisher: any) => (
               <tr key={publisher.publisher_id}>
-                <td className="border p-2 font-medium">{publisher.name}</td>
-                <td className="border p-2">{publisher.address || "-"}</td>
-                <td className="border p-2">{publisher.email || "-"}</td>
-                <td className="border p-2">{publisher.phone || "-"}</td>
+                <td className="border p-2 font-medium text-black">{publisher.name}</td>
+                <td className="border p-2 text-black">{publisher.address || "-"}</td>
+                <td className="border p-2 text-black">{publisher.email || "-"}</td>
+                <td className="border p-2 text-black">{publisher.phone || "-"}</td>
                 <td className="border p-2">
                   <div className="flex justify-center gap-2">
                     <Link

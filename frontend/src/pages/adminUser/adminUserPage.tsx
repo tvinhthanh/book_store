@@ -35,31 +35,31 @@ const AdminUsersPage = () => {
       </div>
 
       {!users || users.length === 0 ? (
-        <p className="text-gray-400 text-sm">Chưa có người dùng nào.</p>
+        <p className="text-black text-sm">Chưa có người dùng nào.</p>
       ) : (
         <table className="w-full border text-sm">
           <thead>
             <tr className="bg-gray-100">
-              <th className="border p-2 text-left">Tên</th>
-              <th className="border p-2 text-left">Email</th>
-              <th className="border p-2 text-left">Số điện thoại</th>
-              <th className="border p-2 text-left">Role</th>
-              <th className="border p-2 text-center w-[160px]">Thao tác</th>
+              <th className="border p-2 text-left text-black">Tên</th>
+              <th className="border p-2 text-left text-black">Email</th>
+              <th className="border p-2 text-left text-black">Số điện thoại</th>
+              <th className="border p-2 text-left text-black">Role</th>
+              <th className="border p-2 text-center w-[160px] text-black">Thao tác</th>
             </tr>
           </thead>
           <tbody>
             {users.map((u: any) => (
               <tr key={u.id_user}>
-                <td className="border p-2">{u.name}</td>
-                <td className="border p-2">{u.email}</td>
-                <td className="border p-2">{u.phone}</td>
+                <td className="border p-2 text-black">{u.name}</td>
+                <td className="border p-2 text-black">{u.email}</td>
+                <td className="border p-2 text-black">{u.phone}</td>
                 <td className="border p-2">
                   <span
                     className={`px-2 py-1 rounded-full text-xs
                     ${
                       u.role === "admin"
-                        ? "bg-purple-100 text-purple-700"
-                        : "bg-gray-100 text-gray-700"
+                        ? "bg-purple-100 text-black"
+                        : "bg-gray-100 text-black"
                     }`}
                   >
                     {u.role}
