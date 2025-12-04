@@ -60,7 +60,7 @@ const AdminAuthorForm = () => {
   });
 
   if (isEdit && isLoading) {
-    return <div>Đang tải thông tin tác giả...</div>;
+    return <div className="text-black">Đang tải thông tin tác giả...</div>;
   }
 
   return (
@@ -68,16 +68,16 @@ const AdminAuthorForm = () => {
       onSubmit={onSubmit}
       className="bg-white p-6 rounded-xl shadow max-w-lg mx-auto"
     >
-      <h2 className="font-bold text-lg mb-4">
+      <h2 className="font-bold text-lg text-black mb-4">
         {isEdit ? "Cập nhật tác giả" : "Thêm tác giả mới"}
       </h2>
 
       <div className="mb-4">
         <label className="block text-sm font-medium mb-1">
-          Tên tác giả <span className="text-red-500">*</span>
+          Tên tác giả <span className="text-orange-600">*</span>
         </label>
         <input
-          className="border rounded w-full px-3 py-2 text-sm"
+          className="border border-orange-600 rounded w-full px-3 py-2 text-sm text-black placeholder:text-gray-500"
           {...register("name", { required: "Không được bỏ trống" })}
         />
       </div>
@@ -85,7 +85,7 @@ const AdminAuthorForm = () => {
       <div className="mb-4">
         <label className="block text-sm font-medium mb-1">Tiểu sử</label>
         <textarea
-          className="border rounded w-full px-3 py-2 text-sm"
+          className="border border-orange-600 rounded w-full px-3 py-2 text-sm text-black placeholder:text-gray-500"
           rows={4}
           {...register("bio")}
           placeholder="Giới thiệu về tác giả..."

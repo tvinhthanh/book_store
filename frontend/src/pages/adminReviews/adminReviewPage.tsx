@@ -45,13 +45,13 @@ const AdminReviewsPage = () => {
   };
 
   if (isLoading) {
-    return <div>Đang tải danh sách đánh giá...</div>;
+    return <div className="text-black">Đang tải danh sách đánh giá...</div>;
   }
 
   return (
     <div className="bg-white p-6 rounded-xl shadow">
       <div className="flex justify-between items-center mb-4">
-        <h2 className="font-bold text-lg">Quản lý đánh giá</h2>
+        <h2 className="font-bold text-lg text-black">Quản lý đánh giá</h2>
       </div>
 
       {!reviews || reviews.length === 0 ? (
@@ -61,13 +61,13 @@ const AdminReviewsPage = () => {
           <table className="w-full border text-sm">
             <thead>
               <tr className="bg-gray-100">
-                <th className="border p-2 text-left">ID</th>
-                <th className="border p-2 text-left">Sách</th>
-                <th className="border p-2 text-left">Khách hàng ID</th>
-                <th className="border p-2 text-left">Đánh giá</th>
-                <th className="border p-2 text-left">Bình luận</th>
-                <th className="border p-2 text-left">Ngày tạo</th>
-                <th className="border p-2 text-center w-[160px]">Thao tác</th>
+                <th className="border p-2 text-left text-black">ID</th>
+                <th className="border p-2 text-left text-black">Sách</th>
+                <th className="border p-2 text-left text-black">Khách hàng ID</th>
+                <th className="border p-2 text-left text-black">Đánh giá</th>
+                <th className="border p-2 text-left text-black">Bình luận</th>
+                <th className="border p-2 text-left text-black">Ngày tạo</th>
+                <th className="border p-2 text-center w-[150px] text-black">Thao tác</th>
               </tr>
             </thead>
             <tbody>
@@ -105,7 +105,7 @@ const AdminReviewsPage = () => {
                         })
                       : "-"}
                   </td>
-                  <td className="border p-2">
+                  <td className="border p-2 text-center">
                     <div className="flex justify-center gap-2">
                       <Link
                         to={`/admin/reviews/${review.review_id}`}

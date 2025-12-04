@@ -35,7 +35,7 @@ const AdminPublisherForm = () => {
         address: publisher.address || "",
         email: publisher.email || "",
         phone: publisher.phone || "",
-      });
+      }); 
     }
   }, [publisher, isEdit, reset]);
 
@@ -58,7 +58,7 @@ const AdminPublisherForm = () => {
   });
 
   if (isEdit && isLoading) {
-    return <div>Đang tải thông tin nhà xuất bản...</div>;
+    return <div className="text-black">Đang tải thông tin nhà xuất bản...</div>;
   }
 
   return (
@@ -66,16 +66,16 @@ const AdminPublisherForm = () => {
       onSubmit={onSubmit}
       className="bg-white p-6 rounded-xl shadow max-w-lg mx-auto"
     >
-      <h2 className="font-bold text-lg mb-4">
+      <h2 className="font-bold text-lg text-black mb-4">
         {isEdit ? "Cập nhật nhà xuất bản" : "Thêm nhà xuất bản mới"}
       </h2>
 
       <div className="mb-4">
         <label className="block text-sm font-medium mb-1">
-          Tên nhà xuất bản <span className="text-red-500">*</span>
+          Tên nhà xuất bản <span className="text-orange-600">*</span>
         </label>
         <input
-          className="border rounded w-full px-3 py-2 text-sm"
+          className="border border-orange-600 rounded w-full px-3 py-2 text-sm text-black placeholder:text-gray-500"
           {...register("name", { required: "Không được bỏ trống" })}
         />
       </div>
@@ -83,7 +83,7 @@ const AdminPublisherForm = () => {
       <div className="mb-4">
         <label className="block text-sm font-medium mb-1">Địa chỉ</label>
         <textarea
-          className="border rounded w-full px-3 py-2 text-sm"
+          className="border border-orange-600 rounded w-full px-3 py-2 text-sm text-black placeholder:text-gray-500"
           rows={2}
           {...register("address")}
           placeholder="Địa chỉ nhà xuất bản..."

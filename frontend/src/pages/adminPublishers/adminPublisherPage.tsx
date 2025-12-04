@@ -18,16 +18,16 @@ const AdminPublishersPage = () => {
   });
 
   if (isLoading) {
-    return <div>Đang tải danh sách nhà xuất bản...</div>;
+    return <div className="text-black">Đang tải danh sách nhà xuất bản...</div>;
   }
 
   return (
     <div className="bg-white p-6 rounded-xl shadow">
       <div className="flex justify-between items-center mb-4">
-        <h2 className="font-bold text-lg">Quản lý nhà xuất bản</h2>
+        <h2 className="font-bold text-lg text-black">Quản lý nhà xuất bản</h2>
         <Link
           to="/admin/publishers/create"
-          className="bg-blue-600 text-white px-4 py-2 rounded text-sm"
+          className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded text-sm"
         >
           Thêm nhà xuất bản
         </Link>
@@ -43,7 +43,7 @@ const AdminPublishersPage = () => {
               <th className="border p-2 text-left text-black">Địa chỉ</th>
               <th className="border p-2 text-left text-black">Email</th>
               <th className="border p-2 text-left text-black">Số điện thoại</th>
-              <th className="border p-2 text-center w-[160px] text-black">Thao tác</th>
+              <th className="border p-2 text-center w-[150px] text-black">Thao tác</th>
             </tr>
           </thead>
           <tbody>
@@ -53,7 +53,7 @@ const AdminPublishersPage = () => {
                 <td className="border p-2 text-black">{publisher.address || "-"}</td>
                 <td className="border p-2 text-black">{publisher.email || "-"}</td>
                 <td className="border p-2 text-black">{publisher.phone || "-"}</td>
-                <td className="border p-2">
+                <td className="border p-2 text-center">
                   <div className="flex justify-center gap-2">
                     <Link
                       to={`/admin/publishers/${publisher.publisher_id}`}

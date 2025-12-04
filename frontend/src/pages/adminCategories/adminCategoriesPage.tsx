@@ -41,7 +41,7 @@ const AdminCategoriesPage = () => {
             <tr className="bg-gray-100">
               <th className="border p-2 text-left text-black">Tên danh mục</th>
               <th className="border p-2 text-left text-black">Mô tả</th>
-              <th className="border p-2 text-center w-[160px] text-black">Thao tác</th>
+              <th className="border p-2 text-center w-[150px] text-black">Thao tác</th>
             </tr>
           </thead>
           <tbody>

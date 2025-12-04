@@ -18,16 +18,16 @@ const AdminAuthorsPage = () => {
   });
 
   if (isLoading) {
-    return <div>Đang tải danh sách tác giả...</div>;
+    return <div className="text-black">Đang tải danh sách tác giả...</div>;
   }
 
   return (
     <div className="bg-white p-6 rounded-xl shadow">
       <div className="flex justify-between items-center mb-4">
-        <h2 className="font-bold text-lg">Quản lý tác giả</h2>
+        <h2 className="font-bold text-lg text-black">Quản lý tác giả</h2>
         <Link
           to="/admin/authors/create"
-          className="bg-blue-600 text-white px-4 py-2 rounded text-sm"
+          className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded text-sm"
         >
           Thêm tác giả
         </Link>
@@ -43,7 +43,7 @@ const AdminAuthorsPage = () => {
               <th className="border p-2 text-left text-black">Tiểu sử</th>
               <th className="border p-2 text-left text-black">Ngày sinh</th>
               <th className="border p-2 text-left text-black">Quốc gia</th>
-              <th className="border p-2 text-center w-[160px] text-black">Thao tác</th>
+              <th className="border p-2 text-center w-[150px] text-black">Thao tác</th>
             </tr>
           </thead>
           <tbody>
@@ -63,7 +63,7 @@ const AdminAuthorsPage = () => {
                     : "-"}
                 </td>
                 <td className="border p-2 text-black">{author.country || "-"}</td>
-                <td className="border p-2">
+                <td className="border p-2 text-center">
                   <div className="flex justify-center gap-2">
                     <Link
                       to={`/admin/authors/${author.author_id}`}

@@ -30,7 +30,10 @@ const AdminBooksPage = () => {
         </Link>
       </div>
 
-      <table className="w-full border text-sm">
+      {!books || books.length === 0 ? (
+        <p className="text-black text-sm">Chưa có sách nào.</p>
+      ) : (
+        <table className="w-full border text-sm">
         <thead>
           <tr className="bg-gray-100">
             <th className="border p-2 text-left text-black">Ảnh</th>
@@ -74,6 +77,7 @@ const AdminBooksPage = () => {
           ))}
         </tbody>
       </table>
+      )}
     </div>
   );
 };
