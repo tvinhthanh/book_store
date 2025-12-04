@@ -5,7 +5,6 @@ import {
   Package,
   ShoppingCart,
   User,
-  Settings,
   Star,
   ChevronLeft,
   ChevronRight,
@@ -21,7 +20,6 @@ const menu = [
   { label: "Tác giả", to: "/admin/authors", icon: <Package size={20} /> },
   { label: "Đánh giá", to: "/admin/reviews", icon: <Star size={20} /> },
   { label: "Người dùng", to: "/admin/users", icon: <User size={20} /> },
-  { label: "Cài đặt", to: "/admin/settings", icon: <Settings size={20} /> },
 ];
 
 interface SidebarProps {
